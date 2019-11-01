@@ -2,13 +2,19 @@ package doc2txt
 
 import (
 	"bytes"
+	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 )
 
 func TestParseSimpleDoc(t *testing.T) {
-	f, _ := os.Open(`testData\simpleDoc.doc`)
+	path := filepath.Join("testdata", "simpleDoc.doc")
+	f, err := os.Open(path)
+	if err != nil {
+		fmt.Println("can't open test file")
+	}
 	buf, err := ParseDoc(f)
 	if err != nil {
 		t.Fatal("expected successful parse", err)
@@ -19,7 +25,11 @@ func TestParseSimpleDoc(t *testing.T) {
 }
 
 func TestParseComplicated(t *testing.T) {
-	f, _ := os.Open(`testData\docFile.doc`)
+	path := filepath.Join("testdata", "docFile.doc")
+	f, err := os.Open(path)
+	if err != nil {
+		fmt.Println("can't open test file")
+	}
 	buf, err := ParseDoc(f)
 	if err != nil {
 		t.Fatal("expected to be able to parse document", err)

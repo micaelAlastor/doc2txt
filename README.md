@@ -6,7 +6,7 @@ A native Go reader for the old Microsoft Word .doc binary format files
 Example usage:
 
 ```go
-f, _ := os.Open(`testData\simpleDoc.doc`)
+f, _ := os.Open(testdata)
 buf, err := ParseDoc(f)
 if err != nil {
   // handle error

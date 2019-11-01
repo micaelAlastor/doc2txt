@@ -1,14 +1,20 @@
 package doc2txt
 
 import (
+	"fmt"
 	"os"
+	"path/filepath"
 	"testing"
 
 	"github.com/richardlehane/mscfb"
 )
 
 func init() {
-	f, _ := os.Open(`testData\simpleDoc.doc`)
+	path := filepath.Join("testdata", "simpleDoc.doc")
+	f, err := os.Open(path)
+	if err != nil {
+		fmt.Println("can't open test file")
+	}
 	reader, _ = mscfb.New(f)
 	simpleDoc, _, table = getWordDocAndTables(reader)
 }
